@@ -1,0 +1,344 @@
+﻿@{
+    // Obtinem proiectul daca exista
+    var projectFromUrl = Request.QueryString["projectNo"];
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare serviciu
+
+    var taskService = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Service();
+    taskService.Credentials = new NetworkCredential(Username, Password);
+
+    var projectService = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    projectService.Credentials = new NetworkCredential(Username, Password);
+
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            var newTask = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST();
+
+            var title = Request.Form["TaskTitle"];
+            var priority = Request.Form["TaskPriority"];
+            var descriere = Request.Form["TaskDescriere"];
+
+            if (title != null && priority != null && descriere != null)
+            {
+                newTask.Task_Title = title;
+
+                switch (Int32.Parse(priority))
+                {
+
+                    case 1: newTask.Priority = ARGGOBEST.Task_ARGGOBEST.Priority.Low; break;
+                    case 2: newTask.Priority = ARGGOBEST.Task_ARGGOBEST.Priority.Normal; break;
+                    case 3: newTask.Priority = ARGGOBEST.Task_ARGGOBEST.Priority.High; break;
+                    default: newTask.Priority = ARGGOBEST.Task_ARGGOBEST.Priority.Low; break;
+
+                }
+                newTask.PrioritySpecified = true;
+
+                var projectIDRequest = "0";
+
+                if (projectFromUrl == null)
+                {
+                    projectIDRequest = Request.Form["projectId"];
+                    var projectID = Int32.Parse(projectIDRequest);
+                    newTask.Project_ID = projectID;
+                } else
+                {
+                    var projectID = Int32.Parse(projectFromUrl);
+                }
+
+
+                if (projectFromUrl != null)
+                {
+                    var projectID = Int32.Parse(projectFromUrl);
+                    newTask.Project_ID = projectID;
+                }
+
+                newTask.Project_IDSpecified = true;
+                newTask.Task_Description = descriere;
+
+                //Variabile optionale, ce sunt default null
+
+                var taskEstAnaliza_Buget = Request.Form["TaskEstAnaliza_Buget"];
+                var taskEstProiectare_Buget = Request.Form["TaskEstProiectare_Buget"];
+                var taskEstDezvoltare_Buget = Request.Form["TaskEstDezvoltare_Buget"];
+                var taskEstTestare_Buget = Request.Form["TaskEstTestare_Buget"];
+
+                var taskEstAnaliza_Realizat = Request.Form["TaskEstAnaliza_Realizat"];
+                var taskEstProiectare_Realizat = Request.Form["TaskEstProiectare_Realizat"];
+                var taskEstDezvoltare_Realizat = Request.Form["TaskEstDezvoltare_Realizat"];
+                var taskEstTestare_Realizat = Request.Form["TaskEstTestare_Realizat"];
+
+                var taskEstAnaliza_Livrare = Request.Form["TaskEstAnaliza_Livrare"];
+                var taskEstProiectare_Livrare = Request.Form["TaskEstProiectare_Livrare"];
+                var taskEstDezvoltare_Livrare = Request.Form["TaskEstDezvoltare_Livrare"];
+                var taskEstTestare_Livrare = Request.Form["TaskEstTestare_Livrare"];
+
+                var taskReaAnaliza_Livrare = Request.Form["TaskReaAnaliza_Livrare"];
+                var taskReaProiectare_Livrare = Request.Form["TaskReaProiectare_Livrare"];
+                var taskReaDezvoltare_Livrare = Request.Form["TaskReaDezvoltare_Livrare"];
+                var taskReaTestare_Livrare = Request.Form["TaskReaTReaare_Livrare"];
+
+                var licenta = Request.Form["licenta"];
+
+                // De adaugat aceste variabile in newTask
+
+                taskService.Create(ref newTask);
+
+                Response.Redirect("Task.cshtml?taskNo=" + newTask.Task_ID);
+            }
+
+        }
+    }
+    }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ARGGOBEST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="~/css/nandi.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+
+    <script type="text/javascript">
+        function changeColor() {
+            var element = document.getElementById("TaskPriority");
+
+            var selectedValue = element.options[element.selectedIndex].value;
+            if (selectedValue == 1) {
+                element.style.background = "yellow";
+            }
+            else if (selectedValue == 2) {
+                element.style.background = "green";
+            }
+            else {
+                element.style.background = "red";
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container pd">
+
+        <h2><u>Adăugare task</u></h2>
+        <form method="post" id="ClientAdd" name="ClientAdd" class="">
+            <table style="width:100%" class="add_table ">
+                <tr>
+                    <td>Titlu task</td>
+                    <td colspan="3"><input type="text" name="TaskTitle" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td><input type="text" name="TaskStatus" /></td>
+                    <td style="text-align:center">Prioritate</td>
+                    <td>
+
+                        <select id="TaskPriority" name="TaskPriority" onchange="changeColor()">
+
+                            <option value="1" style="background:yellow" selected>Low</option>
+                            <option value="2" style="background:green">Normal</option>
+                            <option value="3" style="background:red">High</option>
+
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Titlu proiect</td>
+                    <td colspan="3">
+                        <select name="projectId">
+                            @{
+                                var projectss = projectService.ReadMultiple(null, null, 0);
+                                if (projectFromUrl == null)
+                                {
+                                    foreach(var project in projectss)
+                                    {
+                                        <option value="@project.Project_ID">@project.Project_Title</option>
+                                    }
+                                } else
+                                {
+                                    <option selected>@projectss.FirstOrDefault(p => p.Project_ID == Int32.Parse(projectFromUrl)).Project_Title</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Descrierer</td>
+                    <td colspan="3"><textarea name="TaskDescriere"></textarea></td>
+                </tr>
+            </table>
+
+
+            <span class="button"><a id="here" onclick="showIt()" href="#"><i class="fas fa-angle-double-up"></i>Advanced...</a></span>
+
+
+            <script type="text/javascript">
+
+
+                function showIt() {
+                    var b = document.getElementById("here");
+                    if (document.getElementById("show").style.display == "table") {
+                        document.getElementById("show").style.display = "none";
+                        b.innerHTML = '<i class="fas fa-angle-double-up"></i>Advanced...';
+
+                    } else {
+                        document.getElementById("show").style.display = "table";
+                        b.innerHTML = '<i class="fas fa-angle-double-down"></i>Advanced...';
+                    }
+                }
+            </script>
+
+            <table class="add_table add_table_2" id="show">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><strong><u>Buget</u></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate analiza</td>
+                                <td><input type="text" name="TaskEstAnaliza_Buget" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Proiectare</td>
+                                <td><input type="text" name="TaskEstProiectare_Buget" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate dezvoltare</td>
+                                <td><input type="text" name="TaskEstDezvoltare_Buget" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Testare</td>
+                                <td><input type="text" name="TaskEstTestare_Buget" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><strong><u>Realizat</u></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate analiza</td>
+                                <td><input type="text" name="TaskEstAnaliza_Realizat" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Proiectare</td>
+                                <td><input type="text" name="TaskEstProiectare_Realizat" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate dezvoltare</td>
+                                <td><input type="text" name="TaskEstDezvoltare_Realizat" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Testare</td>
+                                <td><input type="text" name="TaskEstTestare_Realizat" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><strong><u>Detalii licenta</u></strong></td>
+                            </tr>
+                            <tr>
+                                <td><textarea name="licenta"></textarea></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><strong><u>Date estimate Livrare</u></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate analiza</td>
+                                <td><input type="text" name="TaskEstAnaliza_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Proiectare</td>
+                                <td><input type="text" name="TaskEstProiectare_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate dezvoltare</td>
+                                <td><input type="text" name="TaskEstDezvoltare_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Testare</td>
+                                <td><input type="text" name="TaskEstTestare_Livrare" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><strong><u>Date realizate livrare</u></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate analiza</td>
+                                <td><input type="text" name="TaskReaAnaliza_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Proiectare</td>
+                                <td><input type="text" name="TaskReaProiectare_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate dezvoltare</td>
+                                <td><input type="text" name="TaskReaDezvoltare_Livrare" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ore estimate Testare</td>
+                                <td><input type="text" name="TaskReaTestare_Livrare" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="#" onclick="document.getElementById('ClientAdd').submit();"><img src="~/Images/ok.png" /></a></td>
+                </tr>
+            </table>
+            </br></br></br></br>
+            <p class="button"><a href="#" class="btn btn-danger" onclick="document.getElementById('ClientAdd').submit();"><img src="~/Images/ok.png" />SUBMIT</a></p>
+        </form>
+    </div>
+    </br>
+    <!-- Footer -->
+    <footer class="w3-container w3-center w3-opacity w3-xlarge">
+        <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+    </footer>
+</body>
+</html>

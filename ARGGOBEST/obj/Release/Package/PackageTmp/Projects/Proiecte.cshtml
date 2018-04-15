@@ -1,0 +1,125 @@
+﻿@{
+    // Initialize general page variables
+    var numeClient = Request.QueryString["numeClient"];
+    var customerName = Request.QueryString["customerName"];
+    var projectName = Request.QueryString["projectName"];
+    var managerProiect = Request.QueryString["managerProiect"];
+    var status = Request.QueryString["Project_Status"];
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web projects
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service proiecte = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    proiecte.Credentials = new NetworkCredential(Username, Password);
+
+    // Conectare la serviciu web customer
+    ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service wsWebCustomer = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    wsWebCustomer.Credentials = new NetworkCredential(Username, Password);
+
+    ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Service userList = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Service();
+    userList.Credentials = new NetworkCredential(Username, Password);
+
+    // Creare filtru pentru citirea informatiilor din serviciu web
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter projectsFilterNo = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter();
+    projectsFilterNo.Field = ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Fields.PM_User_ID;
+
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter[] projectsFilter = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter[] { projectsFilterNo };
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST[] projects = proiecte.ReadMultiple(projectsFilter, null, 0);
+
+
+    //initiare variabile de acces
+    var clients = wsWebCustomer.ReadMultiple(null, null, 0);
+    var users = userList.ReadMultiple(null, null, 0);
+
+
+
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+    <title>ARGGOBEST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/style_proiecte.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/nandi.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+    <script src="~/Scripts/common.js"></script>
+
+    <div class="w3-container w3-content w3-center" style="max-width:800px" id="band">
+        <br>
+        <br>
+        <br>
+        <h2 class="w3-wide"><b><u>Lista proiecte</h2></u></b><br />
+        <h3 class="w3-wide button" style="font-size:22px">
+            <a href="~/Projects/ProiectNou.cshtml"><strong><i class="fas fa-plus"></i> Proiect nou</strong></a><br />
+
+            <br />
+            <table id="myTable" style="width:100%" class="table-hover table_raport">
+                <tr>
+                    <th>Nume client <i class="fas fa-angle-down" onclick='sortTable("myTable",0)'></i></th>
+                    <th>Proiect <i class="fas fa-angle-down" onclick='sortTable("myTable",1)'></i></th>
+                    <th>Manager Proiect</th>
+                    <th>Status <i class="fas fa-angle-down" onclick='sortTable("myTable",3)'></i></th>
+                </tr>
+                @foreach (ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST pr in projects)
+
+                {
+                    //Extragere de proiecte
+                    var user = users.FirstOrDefault(d => d.User_ID == pr.Project_ID);
+                    var client = clients.FirstOrDefault(p => p.No == pr.Customer_ID);
+
+                    <tr class="colorTr">
+                        <td id="tab"><a href="../Customer/Card.cshtml?customerNo=@HttpUtility.UrlEncode(pr.Customer_ID)">@client.Name</a></td>
+                        <td><a href="Proiect.cshtml?projectNo=@pr.Project_ID">@pr.Project_Title</a></td>
+                        @if (@user == null)
+                        {
+                            <td>*</td>
+                        }
+                        else
+                        {
+                            <td>@user.User_Name</td>
+
+                        }
+
+                        <td>@pr.Project_Status</td>
+                    </tr>
+                }
+
+            </table>
+    </div>
+
+    <script src="~/Scripts/sortare_proiecte.js"></script>
+    </br>
+    <!-- Footer -->
+    <footer class="w3-container w3-center w3-opacity w3-xlarge">
+        <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,277 @@
+﻿@{
+    // Initialize general page variables
+    var projectNo = Request.QueryString["projectNo"];
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web
+    var task_ARGGOBEST = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Service();
+    task_ARGGOBEST.Credentials = new NetworkCredential(Username, Password);
+
+    var projectsService = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    projectsService.Credentials = new NetworkCredential(Username, Password);
+
+    ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Service userList = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Service();
+    userList.Credentials = new NetworkCredential(Username, Password);
+
+    var customerService = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    customerService.Credentials = new NetworkCredential(Username, Password);
+
+    var taskLogService = new ARGGOBEST.Task_Logs_ARGGOBEST.Task_Logs_ARGGOBEST_Service();
+    taskLogService.Credentials = new NetworkCredential(Username, Password);
+
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter projectsFilterNo = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter();
+    projectsFilterNo.Field = ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Fields.PM_User_ID;
+    projectsFilterNo.Criteria = projectNo;
+
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter[] projectsFilter = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Filter[] { projectsFilterNo };
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST[] projects = projectsService.ReadMultiple(projectsFilter, null, 1);
+
+    var tasksFilter = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter();
+    tasksFilter.Field = ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Fields.Project_ID;
+    tasksFilter.Criteria = projectNo;
+    var tasksFilters = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter[] { tasksFilter };
+    var tasks = task_ARGGOBEST.ReadMultiple(tasksFilters, null, 0);
+
+    //Extragem date proiecte
+    var projectss = projectsService.ReadMultiple(null, null, 0);
+    var clients = customerService.ReadMultiple(null, null, 0);
+    var taskLogs = taskLogService.ReadMultiple(null, null, 0);
+
+    //validare
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            var updateProject = projectss.FirstOrDefault(p => p.Project_ID == Int32.Parse(projectNo));
+
+            var numeProiect = Request.Form["numeProiect"];
+            var numeClient = Request.Form["numeClient"];
+            var managerProiect = Request.Form["managerProiect"];
+            var descriere = Request.Form["descriere"];
+
+            if (numeProiect != null)
+            {
+                updateProject.Project_Title = numeProiect;
+            }
+            if (numeClient != null)
+            {
+                var newCustomer = clients.FirstOrDefault(p => p.Name == numeClient).No;
+                updateProject.Customer_ID = newCustomer;
+            }
+            if (managerProiect != null)
+            {
+                var userFilter = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Filter();
+                userFilter.Field = ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Fields.User_Name;
+                userFilter.Criteria = Convert.ToString(managerProiect);
+                var userFilters = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Filter[] { userFilter };
+                var users = userList.ReadMultiple(userFilters, null, 1);
+                if(users != null)
+                {
+                    var newManager = users[0].User_ID;
+                    updateProject.PM_User_ID = newManager;
+                    updateProject.PM_User_IDSpecified = true;
+                }
+            }
+            if(descriere != null)
+            {
+                updateProject.Project_Description = descriere;
+            }
+
+            projectsService.Update(ref updateProject);
+
+            Response.Redirect("Proiect.cshtml?projectNo=" + updateProject.Project_ID);
+        }
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ARGGOBEST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/nandi.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+
+    <div class="container supra">
+        <h1><strong>Project Tracker:</strong></h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-10">
+                <h3><strong>Project: @projectNo</strong></h3>
+            </div>
+            
+            <div class="col-md-2">
+                <a href="~/Tasks/adaugatask.cshtml?projectNo=@projectNo"><i class="fas fa-plus"></i>Adaugă Task</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+	<form id="project" method="post">
+        <table class="table_proj">
+            @if (projectNo == null)
+    {
+        <tr style="font-size: 14px"><strong><em>Error project was not found</em></strong> </tr>
+            }
+            else
+            {
+                var currentPRoject = projectss.FirstOrDefault(d => d.Project_ID == Int32.Parse(projectNo));
+                var doNext = true;
+                if (currentPRoject == null)
+                {
+                    doNext = false;
+                }
+                if (doNext)
+                {
+                    var userFilter = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Filter();
+                    userFilter.Field = ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Fields.User_ID;
+                    userFilter.Criteria = Convert.ToString(currentPRoject.PM_User_ID);
+                    var userFilters = new ARGGOBEST.Users_ARGGOBEST.Users_ARGGOBEST_Filter[] { userFilter };
+                    var users = userList.ReadMultiple(userFilters, null, 1);
+                    var user = users[0];
+        <tr class="colorTr">
+            <td>
+                Client
+                <!--<button onclick="window.myFunction2()">Editare client</button>-->
+            </td>
+<td id="schimba2"><a href="~/Customer/Card.cshtml?customerNo=currentPRoject.Customer_ID">@clients.FirstOrDefault(p => p.No == currentPRoject.Customer_ID).Name</a></td>
+
+            </tr>
+            <tr class="colorTr">
+                <td>Nume proiect</td>
+                <td ondblclick="window.myFunction()" id="schimba">@currentPRoject.Project_Title</td>
+                <td>Status</td>
+                <td>
+
+                    <select>
+                        <option value="New">New</option>
+                        <option value="Development">Development</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr class="colorTr">
+                <td>Manager proiect</td>
+                @if (@user == null)
+        {
+            <td ondblclick="window.myFunction3()" id="schimba3">*</td>
+    }
+    else
+    {
+            <td ondblclick="window.myFunction3()" id="schimba3">@user.User_Name</td>
+    }
+            </tr>
+            <tr class="colorTr">
+                <td>Descriere</td>
+                <td ondblclick="window.myFunction4()" id="schimba4">@currentPRoject.Project_Description</td>
+            </tr>
+            <tr class="colorTr">
+                <td>
+                    <button type="submit" disabled id="submit" onclick="document.getElementById('project').submit();">Submit</button>
+                </td>
+            </tr>
+
+            }
+            }
+
+
+
+            </table>
+
+    </div>
+
+    <br /><br /><br /><br />
+    <div style="clear:both"></div>
+    <div class="container">
+        <table class="table_raport table link table-hover">
+
+                <th>ID Task</th>
+                <th>Titlu task</th>
+                <th>Prioritate task</th>
+                <th>Status task</th>
+
+
+                @foreach (ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST task in tasks)
+            {
+                var taskLog = taskLogs.FirstOrDefault(p => p.Task_ID == task.Task_ID);
+                <tr class="colorTr">
+                    <td><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_ID</a></td>
+                    <td><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_Title</a></td>
+                    <td>@task.Priority</td>
+                    @if (taskLog == null)
+                {
+                    <td>-</td>
+            }
+            else
+            {
+                <td>@taskLog.Task_Status</td>
+        }
+
+                </tr>
+        }
+
+            </table>
+        </form>
+        <script>
+            window.myFunction = function () {
+                document.getElementById("submit").disabled = false;//enable buton submit
+                var element = document.getElementById("schimba");
+                var result = "<input type='text' name='numeProiect' placeHolder='" + element.innerHTML + "' > ";
+                element.innerHTML = result;
+            }
+            window.myFunction2 = function () {
+                document.getElementById("submit").disabled = false;//enable buton submit
+                var element = document.getElementById("schimba2");
+                var result = "<input type='text' name='numeClient' placeHolder='" + "Spotsmeyer s Furnishings" + "' > ";
+                element.innerHTML = result;
+            }
+            window.myFunction3 = function () {
+                document.getElementById("submit").disabled = false;//enable buton submit
+                var element = document.getElementById("schimba3");
+                var result = "<input type='text' name='managerProiect' placeHolder='" + element.innerHTML + "' > ";
+                element.innerHTML = result;
+            }
+            window.myFunction4 = function () {
+                document.getElementById("submit").disabled = false;//enable buton submit
+                var element = document.getElementById("schimba4");
+                var result = "<textarea name='descriere'>" + element.innerHTML + "</textarea> ";
+                element.innerHTML = result;
+            }
+        </script>
+
+        </br>
+        <!-- Footer -->
+                <footer class="w3-container w3-center w3-opacity w3-xlarge">
+                    <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+                </footer>
+</body>
+</html>

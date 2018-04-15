@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ARGGOBEST.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ARGGOBEST_Customers_ARGGOBEST_Customers_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Customers_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_WebCustomers_Customers_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Customers_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_consulting_arggo_nav2018_Project_Users_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Project_Users_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_consulting_arggo_nav2018_Projects_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Projects_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_consulting_arggo_nav2018_Roles_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Roles_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_Task_Logs_ARGGOBEST_Task_Logs_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Task_Logs_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_Task_Users_ARGGOBEST_Task_Users_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Task_Users_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_Task_ARGGOBEST_Task_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Task_ARGGOBEST</Value>
+    </Setting>
+    <Setting Name="ARGGOBEST_Users_ARGGOBEST_Users_ARGGOBEST_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus09/Page/Users_ARGGOBEST</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

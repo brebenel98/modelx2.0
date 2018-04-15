@@ -1,0 +1,146 @@
+﻿body {
+    background-image: url("../Images/img.jpg");
+}
+
+.table_raport {
+   width: 100%;
+}
+
+    .table_raport th {
+        border: 1px solid black;
+        background-color: #00b8e6;
+    }
+
+.table_raport td{
+    border: 1px solid black;
+}
+
+.table_raport tr {
+    background: white;
+}
+
+.pd{
+    padding: 150px;
+}
+
+.supra {
+    padding: 90px;
+}
+.pd h2 {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.link a{
+    color: black;
+    text-decoration: none;
+}
+
+.link a:hover {
+    color: black;
+    
+    text-decoration: underline;
+}
+
+.colorTr :hover {
+    background: #99ff66;
+}
+
+#borderIt {
+    border-radius: 17px;
+    border: 3px solid black;
+}
+
+.add_table textarea {
+    width:100%;
+    height: 50%;
+}
+.add_table tr {
+    margin-top: 20px;
+}
+
+
+.add_table td {
+    font-family: 'Comic Sans MS';
+    font-size: 19px;
+    text-align: left;
+    margin-right: 12px;
+    margin-top:50px;
+}
+
+.add_table input, select, textarea {
+    border-radius: 7px;
+    width: 100%;
+}
+
+#TaskPriority {
+    background: yellow;
+}
+
+.add_table_2 td {
+    font-size: 16px;
+}
+
+.button a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Comic Sans MS';
+    font-size: 20px;
+}
+
+.button a:hover {
+   text-decoration: none;
+   color: black;
+}
+
+.button {
+    margin-bottom: 50px;
+}
+
+#show {
+    display: none;
+}
+
+.sub img {
+    margin-top:50px;
+    padding:10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background: white;
+}
+
+.col-md-10 h3 {
+    text-decoration: none;
+    color: black;
+    font-family: 'Comic Sans MS';
+    font-size: 20px;
+    text-align: left;
+}
+
+.col-md-2 a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Comic Sans MS';
+    font-size: 20px;
+    text-align: right;
+    
+}
+.table_proj {
+    width: 100%;
+    background: white;
+    border: 1px solid black;
+}
+
+
+.col-md-2 a:hover{
+    text-decoration: underline;
+    color: black;
+}
+#moreOptions select{
+    width:15%;
+}
+#moreOptions select, label {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+

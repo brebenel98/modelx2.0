@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://nav2018.arggo.consulting:7052/ARGGOBEST/WS/Cronus ASP/Page/Customers_ARGGOBEST" filename="Customers_ARGGOBEST.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.dll">
+      <publishTime>04/15/2018 12:08:46</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.dll.config">
+      <publishTime>04/15/2018 07:58:34</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.pdb">
+      <publishTime>04/15/2018 12:08:46</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.vshost.exe">
+      <publishTime>03/06/2018 15:49:20</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.vshost.exe.config">
+      <publishTime>03/06/2018 15:38:02</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.vshost.exe.manifest">
+      <publishTime>09/29/2017 16:43:18</publishTime>
+    </File>
+    <File Include="bin/ARGGOBEST.XmlSerializers.dll">
+      <publishTime>04/15/2018 12:08:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/03/2014 20:33:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/28/2015 04:02:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/01/2018 12:16:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/10/2013 17:28:38</publishTime>
+    </File>
+    <File Include="ClientAdd.cshtml">
+      <publishTime>03/13/2018 16:09:13</publishTime>
+    </File>
+    <File Include="ClientCard.cshtml">
+      <publishTime>03/13/2018 16:09:28</publishTime>
+    </File>
+    <File Include="ClientEditare.cshtml">
+      <publishTime>03/13/2018 16:09:21</publishTime>
+    </File>
+    <File Include="ClientLista.cshtml">
+      <publishTime>03/20/2018 15:22:56</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>03/25/2018 13:35:30</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>04/14/2018 14:00:16</publishTime>
+    </File>
+    <File Include="css/nandi.css">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="css/style.css">
+      <publishTime>04/14/2018 13:51:46</publishTime>
+    </File>
+    <File Include="Customer/Add.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Customer/Card.cshtml">
+      <publishTime>04/04/2018 09:34:46</publishTime>
+    </File>
+    <File Include="Customer/Edit.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Customer/List.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Default.cshtml">
+      <publishTime>04/15/2018 11:52:11</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/14/2018 14:00:18</publishTime>
+    </File>
+    <File Include="Images/accent.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/Add-Contact.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/arggo-new.png">
+      <publishTime>03/13/2018 11:10:46</publishTime>
+    </File>
+    <File Include="Images/BestLogo.png">
+      <publishTime>03/13/2018 16:25:08</publishTime>
+    </File>
+    <File Include="Images/bullet.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/Comment.ico">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/comment.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/edit.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/heroAccent.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/heroAccent_original.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/img.jpg">
+      <publishTime>04/15/2018 11:39:16</publishTime>
+    </File>
+    <File Include="Images/LogoApp.jpg">
+      <publishTime>03/20/2018 11:59:56</publishTime>
+    </File>
+    <File Include="Images/meeting.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/ok.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList0.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList1.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList2.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList3.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList4.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList5.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList6.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList7.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList8.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/orderedList9.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/PDF.png">
+      <publishTime>04/07/2017 17:28:04</publishTime>
+    </File>
+    <File Include="Images/phone.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/search.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/searchicon.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="Images/todo.png">
+      <publishTime>02/24/2017 10:58:48</publishTime>
+    </File>
+    <File Include="includes/navbar.html">
+      <publishTime>04/14/2018 15:32:20</publishTime>
+    </File>
+    <File Include="ProiectLista.cshtml">
+      <publishTime>03/09/2018 12:19:13</publishTime>
+    </File>
+    <File Include="Projects/Proiect.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Projects/Proiecte.cshtml">
+      <publishTime>04/15/2018 12:06:44</publishTime>
+    </File>
+    <File Include="Projects/ProiectNou.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Rapoarte/Rapoarte.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="RaportareLista.cshtml">
+      <publishTime>03/09/2018 12:20:14</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Scripts/filter.js">
+      <publishTime>04/15/2018 09:45:32</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>04/14/2018 14:00:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>04/14/2018 14:00:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>04/14/2018 14:00:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>04/14/2018 14:00:40</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>04/14/2018 14:00:40</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>04/14/2018 14:00:42</publishTime>
+    </File>
+    <File Include="Scripts/sortare_proiecte.js">
+      <publishTime>04/14/2018 19:36:16</publishTime>
+    </File>
+    <File Include="TaskLista.cshtml">
+      <publishTime>03/09/2018 12:19:57</publishTime>
+    </File>
+    <File Include="Tasks/adaugatask.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Tasks/task.cshtml">
+      <publishTime>04/15/2018 11:51:46</publishTime>
+    </File>
+    <File Include="Tasks/taskuri.cshtml">
+      <publishTime>04/15/2018 11:51:45</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>04/14/2018 14:00:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>04/14/2018 14:00:16</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>04/14/2018 14:00:18</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>04/14/2018 14:00:16</publishTime>
+    </File>
+    <File Include="Web References/Customers_ARGGOBEST/Customers_ARGGOBEST.datasource">
+      <publishTime>03/06/2018 15:01:24</publishTime>
+    </File>
+    <File Include="Web References/Customers_ARGGOBEST/Reference.map">
+      <publishTime>03/06/2018 15:01:22</publishTime>
+    </File>
+    <File Include="Web References/Projects_ARGGOBEST/Projects_ARGGOBEST1.datasource">
+      <publishTime>04/14/2018 16:40:44</publishTime>
+    </File>
+    <File Include="Web References/Project_Users_ARGGOBEST/Project_Users_ARGGOBEST1.datasource">
+      <publishTime>04/14/2018 16:40:38</publishTime>
+    </File>
+    <File Include="Web References/Roles_ARGGOBEST/Reference.map">
+      <publishTime>04/14/2018 16:00:42</publishTime>
+    </File>
+    <File Include="Web References/Roles_ARGGOBEST/Roles_ARGGOBEST1.datasource">
+      <publishTime>04/14/2018 16:00:54</publishTime>
+    </File>
+    <File Include="Web References/Task_ARGGOBEST/Reference.map">
+      <publishTime>04/14/2018 16:02:20</publishTime>
+    </File>
+    <File Include="Web References/Task_ARGGOBEST/Task_ARGGOBEST.datasource">
+      <publishTime>04/14/2018 16:02:22</publishTime>
+    </File>
+    <File Include="Web References/Task_Logs_ARGGOBEST/Reference.map">
+      <publishTime>04/14/2018 16:01:34</publishTime>
+    </File>
+    <File Include="Web References/Task_Logs_ARGGOBEST/Task_Logs_ARGGOBEST.datasource">
+      <publishTime>04/14/2018 16:01:36</publishTime>
+    </File>
+    <File Include="Web References/Task_Users_ARGGOBEST/Reference.map">
+      <publishTime>04/14/2018 16:01:58</publishTime>
+    </File>
+    <File Include="Web References/Task_Users_ARGGOBEST/Task_Users_ARGGOBEST.datasource">
+      <publishTime>04/14/2018 16:02:00</publishTime>
+    </File>
+    <File Include="Web References/Users_ARGGOBEST/Reference.map">
+      <publishTime>04/14/2018 16:02:46</publishTime>
+    </File>
+    <File Include="Web References/Users_ARGGOBEST/Users_ARGGOBEST.datasource">
+      <publishTime>04/14/2018 16:02:48</publishTime>
+    </File>
+    <File Include="Web References/WebCustomers/Customers_ARGGOBEST.datasource">
+      <publishTime>03/13/2018 18:04:20</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/15/2018 12:00:09</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

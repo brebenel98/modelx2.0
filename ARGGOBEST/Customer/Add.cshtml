@@ -1,0 +1,92 @@
+﻿@{
+    // Initialize general page variables
+    var customerNo = Request.QueryString["customerNo"];
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web
+    ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service wsWebCustomer = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    wsWebCustomer.Credentials = new NetworkCredential(Username, Password);
+
+        if (IsPost)
+        {
+            if (Validation.IsValid())
+            {
+                string CustomerName = Request.Form["CustomerName"];
+                string CustomerAddress = Request.Form["CustomerAddress"];
+                if (CustomerName != "")
+                {
+                    ARGGOBEST.WebCustomers.Customers_ARGGOBEST webCustomer = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST();
+                    
+                    webCustomer.Name = CustomerName;
+                    webCustomer.Address = CustomerAddress;
+                    
+                    wsWebCustomer.Create(ref webCustomer);
+                    Response.Redirect("List");
+                }
+
+
+            }
+
+       }
+
+}
+
+<!DOCTYPE html>
+<html>
+<title>ARGGOBEST</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="~/css/nandi.css" />
+
+<body>
+
+    <!-- Header -->
+    <h1 hidden>ARGGOBEST</h1><br />
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- The Content Section -->
+    <div class="w3-container w3-content w3-center" style="max-width:800px">
+        <h2 class="w3-wide">Adăugare client</h2><br />
+        <form method="post" id="ClientAdd" name="ClientAdd">
+            <table style="width:100%" class="table_raport">
+                <tr>
+                    <th>Nume client</th>
+                    <th colspan="3">Adresa client</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size="50" id="CustomerName" name="CustomerName" value="" /></td>
+                    <td><input type="text" size="50" id="CustomerAddress" name="CustomerAddress" value="" /></td>
+                </tr>
+            </table>
+            <table style="width:5%">
+                <tr>
+                    <td style="text-align:right"><a href="#" onclick="document.getElementById('ClientAdd').submit();"><img src="~/Images/ok.png" /></a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- Footer --><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br />
+    <footer class="w3-container w3-center w3-opacity w3-xlarge">
+        <p class="w3-medium">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+    </footer>
+</body>
+</html>

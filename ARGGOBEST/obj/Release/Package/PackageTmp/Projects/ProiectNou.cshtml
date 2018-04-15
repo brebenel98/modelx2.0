@@ -1,0 +1,125 @@
+﻿@{
+    // Initialize general page variables
+
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web
+    ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service proiecte = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    proiecte.Credentials = new NetworkCredential(Username, Password);
+    
+
+    ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service wsWebCustomer = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    wsWebCustomer.Credentials = new NetworkCredential(Username, Password);
+
+
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            string ClientName = Request.Form["ClientName"];
+            string ProjectName = Request.Form["ProjectName"];
+            var Status = Request.Form["Status"];
+            string NumeClient = Request.Form["NumeClient"];
+
+            if (ProjectName != "")
+            {
+
+                var clients = wsWebCustomer.ReadMultiple(null, null, 0);
+                var client = clients.FirstOrDefault(p => p.Name == ClientName);
+
+                if (client != null)
+                {
+                    var webProjects = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST();
+
+                    webProjects.Project_Title = ProjectName;
+                    webProjects.Customer_ID = client.No;
+
+                    //webProjects.Project_Status = Status;
+
+
+                    proiecte.Create(ref webProjects);
+                    Response.Redirect("Proiecte");
+                }
+
+
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<title>ARGGOBEST</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/nandi.css" />
+<link rel="stylesheet" href="~/Content/bootstrap.css" />
+<body>
+
+    <!-- Header -->
+    <h1 hidden>ARGGOBEST</h1><br />
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+
+    <!-- The Content Section -->
+    <div class="w3-container w3-content w3-center" style="max-width:800px">
+       <h2 class="w3-wide"><strong><u>Adăugare proiect</u></strong></h2><br />
+        <form method="post" id="ProiectAdd" name="ClientAdd">
+            <table style="width:100%" class="add_table">
+                <tr>
+                    <td>Nume client</td>
+                    <td><input type="text" size="20" id="ClientName" name="ClientName" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Proiect</td>
+                    <td><input type="text" size="20" id="ProjectName" name="ProjectName" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Manager Proiect</td>
+                    <td><input type="text" size="20" id="ManagerName" name="ManagerName" value="" /></td>
+                </tr>
+               
+                <tr>
+                    <td>Status proiect:</td>
+                    <!--<th>
+                        <select id="projectStatus" name="projectStatus">
+                            <option value="0"></option>
+                            <option value="1" >Intentie</option>
+                            <option value="2" >Proiectare</option>
+                            <option value="3" >Atribuire/Selectie</option>
+                            <option value="4" >Executie</option>
+                            <option value="5">Terminat</option>
+                        </select>
+                    </th>-->
+                </tr>
+            </table>
+            
+                
+            <button type="button" class="btn btn-danger button"><a href="#" onclick="document.getElementById('ProiectAdd').submit();"><img src="~/Images/ok.png" />SUBMIT</a></></button>
+
+</form>
+    </div>
+    <!-- Footer --><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br />
+    <footer class="w3-container w3-center w3-opacity w3-xlarge">
+        <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+    </footer>
+</body>
+</html>

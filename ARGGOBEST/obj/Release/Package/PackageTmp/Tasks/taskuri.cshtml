@@ -1,0 +1,160 @@
+﻿@{  // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web
+    var task_ARGGOBEST = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Service();
+    task_ARGGOBEST.Credentials = new NetworkCredential(Username, Password);
+
+    var projectsService = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    projectsService.Credentials = new NetworkCredential(Username, Password);
+
+    var customerService = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    customerService.Credentials = new NetworkCredential(Username, Password);
+
+    var taskLogService = new ARGGOBEST.Task_Logs_ARGGOBEST.Task_Logs_ARGGOBEST_Service();
+    taskLogService.Credentials = new NetworkCredential(Username, Password);
+
+
+    // Creare filtru pentru citirea info...
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter wsTaskFilterNo = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter();
+    wsTaskFilterNo.Field = ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Fields.Task_ID;
+
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter[] wsWebFilter = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter[] { wsTaskFilterNo };
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST[] tasks = task_ARGGOBEST.ReadMultiple(wsWebFilter, null, 0);
+
+    //Extragem date proiecte
+    var projects = projectsService.ReadMultiple(null, null, 0);
+    var clients = customerService.ReadMultiple(null, null, 0);
+    var taskLogs = taskLogService.ReadMultiple(null, null, 0);
+
+/*    <%@ Master Language="C#" AutoEventWireup="true"
+    CodeFile="System.Net.Mail" Inherits="MasterPage" %>
+
+    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 465);
+
+    smtpClient.Credentials = new System.Net.NetworkCredential("alexbestem2018@gmail.com", "16244alex%%");
+    smtpClient.UseDefaultCredentials = true;
+    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+    smtpClient.EnableSsl = true;
+    MailMessage mail = new MailMessage();
+
+    //Setting From , To and CC
+    mail.From = new MailAddress("alexbestem2018@gmail.com", "MyWeb Site");
+    mail.To.Add(new MailAddress("andreijugaurs@gmail.com"));
+
+    smtpClient.Send(mail); */
+
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>ARGGOBEST</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="~/css/nandi.css" />
+        <link rel="stylesheet" href="~/Content/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+
+    </head>
+    <body>
+        <div class="w3-top">
+            <div class="w3-bar w3-black w3-card">
+                <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+                <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+                <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+                <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+                <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+            </div>
+        </div>
+
+
+    <div class="container supra">
+        <div class="row">
+            <div class="col-md-12">
+                <h2><strong>Project Tracker</strong></h2>
+            </div>
+
+
+
+        </div>
+
+        <div class="link">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3><u>Listă Taskuri</u></h3>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="~/Tasks/adaugatask.cshtml"><i class="fas fa-plus"></i>Adaugă Task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="moreOptions">
+            <div class="container">
+                <label><strong>Filrtrare după prioritate</strong></label>
+                <select id="prioritateSelect" onchange='setFilter("prioritateSelect")'>
+
+                    <option value="High">High</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+        </div>
+        </br></br>
+        <div class="container">
+            <table id="taskuriList" class="table_raport link table table-hover" style="boder:5px">
+                <th><i class="fas fa-angle-down" onclick='sortTable("taskuriList",0)'></i>Denumire client</th>
+                <th><i class="fas fa-angle-down" onclick='sortTable("taskuriList",1)'></i>Titlu proiect</th>
+                <th><i class="fas fa-angle-down" onclick='sortTable("taskuriList",2)'></i>ID Task</th>
+                <th>Titlu Task</th>
+                <th>Descriere Task</th>
+                <th>Status Task</th>
+                <th>Prioritate</th>
+
+                @foreach (ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST task in tasks)
+            {
+                var project = projects.FirstOrDefault(p => p.Project_ID == task.Project_ID);
+                var taskLog = taskLogs.FirstOrDefault(p => p.Task_ID == task.Task_ID);
+                <tr class="colorTr">
+                    <td><a href="~/Customer/Card.cshtml?customerNo=@project.Customer_ID">@clients.FirstOrDefault(p => p.No == project.Customer_ID).Name</a></td>
+                    <td><a href="~/Projects/Proiect.cshtml?projectNo=@project.Project_ID">@project.Project_Title</a></td>
+                    <td><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_ID</a></td>
+
+                    <td><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_Title</a></td>
+                    <td>@task.Task_Description</td>
+                    @if (taskLog == null)
+                {
+                    <td>-</td>
+            }
+            else
+            {
+                <td>@taskLog.Task_Status</td>
+        }
+                    <td>@task.Priority</td>
+                </tr>
+        }
+
+            </table>
+
+        </div>
+        <script src="~/Scripts/filter.js"></script>
+        <script src="~/Scripts/sortare_proiecte.js"></script>
+        </br>
+        <!-- Footer -->
+        <footer class="w3-container w3-center w3-opacity w3-xlarge">
+            <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+        </footer>
+</body>
+</html>

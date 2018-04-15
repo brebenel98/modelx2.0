@@ -1,0 +1,215 @@
+﻿@{
+    // Initialize general page variables
+    var taskNo = Request.QueryString["taskNo"];
+
+    // Credentiale folosite in Web.config pentru accesarea serviciului Web
+    var Username = System.Configuration.ConfigurationManager.AppSettings["Username"];
+    var Password = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
+    // Conectare la serviciu web
+    var task_ARGGOBEST = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Service();
+    task_ARGGOBEST.Credentials = new NetworkCredential(Username, Password);
+
+    var projectsService = new ARGGOBEST.Projects_ARGGOBEST.Projects_ARGGOBEST_Service();
+    projectsService.Credentials = new NetworkCredential(Username, Password);
+
+    var customerService = new ARGGOBEST.WebCustomers.Customers_ARGGOBEST_Service();
+    customerService.Credentials = new NetworkCredential(Username, Password);
+
+    var taskLogService = new ARGGOBEST.Task_Logs_ARGGOBEST.Task_Logs_ARGGOBEST_Service();
+    taskLogService.Credentials = new NetworkCredential(Username, Password);
+
+
+    // Creare filtru pentru citirea info...
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter wsTaskFilterNo = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter();
+    wsTaskFilterNo.Field = ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Fields.Task_ID;
+
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter[] wsWebFilter = new ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST_Filter[] { wsTaskFilterNo };
+    ARGGOBEST.Task_ARGGOBEST.Task_ARGGOBEST[] tasks = task_ARGGOBEST.ReadMultiple(wsWebFilter, null, 0);
+
+    //Extragem date proiecte
+    var projects = projectsService.ReadMultiple(null, null, 0);
+    var clients = customerService.ReadMultiple(null, null, 0);
+    var taskLogs = taskLogService.ReadMultiple(null, null, 0);
+
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            var updateTask = tasks.FirstOrDefault(p => p.Task_ID == Int32.Parse(taskNo));
+
+            var numeProiect = Request.Form["titluProiect"];
+            var taskName = Request.Form["titluTask"];
+            var taskDescriere = Request.Form["descriereTask"];
+
+            if(taskName != null)
+            {
+                updateTask.Task_Title = taskName;
+            }
+
+            if(taskDescriere != null)
+            {
+                updateTask.Task_Description = taskDescriere;
+            }
+
+            if(numeProiect != null)
+            {
+                var project = projects.FirstOrDefault(p => p.Project_Title == numeProiect);
+                if(project != null)
+                {
+                    var projectID = project.Project_ID;
+                    updateTask.Project_ID = projectID;
+                }
+            }
+
+            task_ARGGOBEST.Update(ref updateTask);
+
+            Response.Redirect("task.cshtml?taskNo=" + updateTask.Task_ID);
+
+        }
+    }
+
+    
+
+    /*WebMail.SmtpServer = "smtp.gmail.com";
+    WebMail.SmtpPort = 465;
+    WebMail.EnableSsl = true;
+    WebMail.SmtpUseDefaultCredentials = true;
+    WebMail.UserName = "alexbestem2018@gmail.com";
+    WebMail.Password = "16244alex%%";
+    WebMail.From = "alexbestem2018@gmail.com"; // "john@example.com";
+    WebMail.Send("andreijugaurs@gmail.com", "Test mail", "Am reusit!!");*/
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ARGGOBEST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/nandi.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a href="~/Customer/List" class="w3-bar-item w3-button w3-padding-large">Clienti</a>
+            <a href="~/Projects/Proiecte.cshtml" class="w3-bar-item w3-button w3-padding-large">Proiecte</a>
+            <a href="~/Tasks/taskuri.cshtml" class="w3-bar-item w3-button w3-padding-large">Taskuri</a>
+            <a href="~/Rapoarte/Rapoarte.cshtml" class="w3-bar-item w3-button w3-padding-large">Raportare</a>
+            <a href="http://arggo.consulting/" class="w3-padding-large  w3-hide-small w3-right"><img src="~/Images/arggo-new.png" /></a>
+        </div>
+    </div>
+
+    <div class="container pd">
+        <form method="post">
+        <table class="table_raport link">
+            <th>Denumire client</th>
+            <th>Titlu proiect</th>
+            <th>ID Task</th>
+            <th>Titlu Task</th>
+            <th>Descriere Task</th>
+            <th>Status Task</th>
+            <th>Prioritate</th>
+
+            @if (taskNo == null)
+            {
+                <tr style="font-size:21px"><strong>ERROR Task not found</strong></tr>
+            }
+            else
+            {
+                var task = tasks.FirstOrDefault(p => p.Task_ID == Int32.Parse(taskNo));
+                var doNext = true;
+                if (task == null)
+                {
+                    doNext = false;
+                }
+                if (doNext)
+                {
+
+                    var project = projects.FirstOrDefault(p => p.Project_ID == task.Project_ID);
+                    var taskLog = taskLogs.FirstOrDefault(p => p.Task_ID == task.Task_ID);
+                    <tr class="colorTr">
+                        <td><a href="~/Customer/Card.cshtml?customerNo=@project.Customer_ID">@clients.FirstOrDefault(p => p.No == project.Customer_ID).Name</a></td>
+                        <td ondblclick="window.myFunction2()" id="schimba2"><a href="~/Projects/Proiect.cshtml?projectNo=@project.Project_ID">@project.Project_Title</a></td>
+                        <td><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_ID</a></td>
+                        <td ondblclick="window.myFunction4()" id="schimba4"><a href="~/Tasks/task.cshtml?taskNo=@task.Task_ID">@task.Task_Title</a></td>
+                        <td ondblclick="window.myFunction5()" id="schimba5">@task.Task_Description</td>
+                        <!-- verificam daca statusul este setat-->
+                        @if (taskLog == null)
+                        {
+                            <td>-</td>
+                        }
+                        else
+                        {
+                            <td ondblclick="window.myFunction6()" id="schimba6">@taskLog.Task_Status</td>
+                        }
+                        <td>
+                            <select>
+                                <option value="@task.Priority">Low</option>
+                                <option value="@task.Priority">Normal</option>
+                                <option value="@task.Priority">High</option>
+                            </select>
+                        </td>
+                        <td><button type="submit" disabled id="submit">Submit</button></td>
+                    </tr>
+                }
+            }
+        </table>
+        </form>
+    </div>
+    </br>
+    <!-- Footer -->
+    <footer class="w3-container w3-center w3-opacity w3-xlarge">
+        <p class="w3-medium button">Powered by <a href="http://arggo.consulting/" target="_blank">ARGGO</a></p>
+    </footer>
+	
+	<script>
+        window.myFunction = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba");
+            var result = "<input type='text' name='denumireClient' placeHolder='" + element.innerHTML + "' > ";
+            element.innerHTML = result;
+        }
+        window.myFunction2 = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba2");
+            var result = "<input type='text' name='titluProiect' placeHolder='" + element.innerHTML + "' > ";
+            element.innerHTML = result;
+            }
+        window.myFunction3 = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba3");
+            var result = "<input type='text' name='idTask' placeHolder='" + element.innerHTML + "' > ";
+            element.innerHTML = result;
+            }
+            window.myFunction4 = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba4");
+            var result = "<input type='text' name='titluTask' placeHolder='" + element.innerHTML + "' > ";
+            element.innerHTML = result;
+            }
+         window.myFunction5 = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba5");
+             var result = "<textarea name = 'descriereTask'>" + element.innerHTML + "</textarea>";
+            element.innerHTML = result;
+            }
+            window.myFunction6 = function () {
+            document.getElementById("submit").disabled = false;//enable buton submit
+            var element = document.getElementById("schimba6");
+            var result = "<input type='text' name='prioritate' placeHolder='" + element.innerHTML + "' > ";
+            element.innerHTML = result;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll.config
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.XmlSerializers.dll
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.pdb
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.dll
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.pdb
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.XmlSerializers.dll
+C:\Visual Studio 2013\Projects\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csprojResolveAssemblyReference.cache
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll.config
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.XmlSerializers.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.pdb
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.Helpers.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.Razor.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Deployment.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Razor.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.Helpers.xml
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.Razor.xml
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.xml
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Deployment.xml
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Razor.xml
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csprojResolveAssemblyReference.cache
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csproj.CoreCompileInputs.cache
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csproj.CopyComplete
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.dll
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.pdb
+C:\Users\BESTEM\Desktop\ARGGOBEST_ASP\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.XmlSerializers.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll.config
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.XmlSerializers.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\ARGGOBEST.pdb
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\Antlr3.Runtime.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\Newtonsoft.Json.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Helpers.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Mvc.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Optimization.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Razor.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Razor.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\WebGrease.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\Antlr3.Runtime.pdb
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\Newtonsoft.Json.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Helpers.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Mvc.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Optimization.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.Razor.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\bin\System.Web.WebPages.Razor.xml
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csprojResolveAssemblyReference.cache
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csproj.CoreCompileInputs.cache
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.csproj.CopyComplete
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.dll
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.pdb
+C:\Users\Iarca Nándor\Desktop\ARGGOBEST\ARGGOBEST\obj\Release\ARGGOBEST.XmlSerializers.dll
